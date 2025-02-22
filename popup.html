@@ -45,9 +45,9 @@
   
   <div class="param-group">
     <label for="pixels">Pixels per Meter</label>
-    <input type="range" id="pixels" min="10" max="500" step="10" value="100">
+    <input type="range" id="pixels" min="10" max="500" step="10" value="400">
     <div class="value-display">
-      <span id="pixels-value">100</span>
+      <span id="pixels-value">400</span>
       <span>px/m</span>
     </div>
     <div class="description">Screen space scaling</div>
@@ -55,39 +55,58 @@
 
   <div class="param-group">
     <label for="friction">Friction</label>
-    <input type="range" id="friction" min="0.1" max="5" step="0.1" value="2.0">
+    <input type="range" id="friction" min="0.1" max="5" step="0.1" value="0.1">
     <div class="value-display">
-      <span id="friction-value">2.0</span>
+      <span id="friction-value">0.1</span>
     </div>
     <div class="description">How quickly motion slows down</div>
   </div>
 
   <div class="param-group">
     <label for="scrollMultiplier">Scroll Strength</label>
-    <input type="range" id="scrollMultiplier" min="10" max="200" step="5" value="50">
+    <input type="range" id="scrollMultiplier" min="10" max="200" step="5" value="105">
     <div class="value-display">
-      <span id="scrollMultiplier-value">50</span>
+      <span id="scrollMultiplier-value">105</span>
     </div>
     <div class="description">How powerful your scroll wheel is</div>
   </div>
 
   <div class="param-group">
     <label for="persistence">Force Persistence</label>
-    <input type="range" id="persistence" min="0.1" max="0.99" step="0.01" value="0.95">
+    <input type="range" id="persistence" min="0.1" max="0.99" step="0.01" value="0.1">
     <div class="value-display">
-      <span id="persistence-value">0.95</span>
+      <span id="persistence-value">0.1</span>
     </div>
     <div class="description">How long scroll force lasts</div>
   </div>
 
   <div class="param-group">
     <label for="maxSpeed">Max Upward Speed</label>
-    <input type="range" id="maxSpeed" min="500" max="3000" step="100" value="1000">
+    <input type="range" id="maxSpeed" min="500" max="3000" step="100" value="900">
     <div class="value-display">
-      <span id="maxSpeed-value">1000</span>
+      <span id="maxSpeed-value">900</span>
       <span>px/s</span>
     </div>
     <div class="description">Maximum speed when scrolling up</div>
+  </div>
+
+  <div class="param-group">
+    <label for="bounce">Bottom Bounce</label>
+    <input type="range" id="bounce" min="0" max="2.0" step="0.05" value="0.8">
+    <div class="value-display">
+      <span id="bounce-value">0.8</span>
+    </div>
+    <div class="description">How bouncy the bottom of the page is</div>
+  </div>
+
+  <div class="param-group">
+    <label for="minBounceVel">Min Bounce Speed</label>
+    <input type="range" id="minBounceVel" min="50" max="500" step="25" value="100">
+    <div class="value-display">
+      <span id="minBounceVel-value">100</span>
+      <span>px/s</span>
+    </div>
+    <div class="description">Minimum speed needed to bounce</div>
   </div>
 
   <script src="popup.js"></script>

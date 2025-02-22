@@ -7,6 +7,8 @@ class GravityScroll {
     this.scrollMultiplier = 105;   // Multiplier for scroll input strength
     this.upwardForcePersistence = 0.1; // How long upward force lasts (0-1)
     this.maxUpwardSpeed = 900;   // Maximum upward scroll speed in pixels/s
+    this.bounceFactor = 0.8;      // How bouncy the bottom edge is (0-1)
+    this.minBounceVelocity = 100; // Minimum velocity needed to trigger a bounce
     
     // State variables
     this.velocity = 0;            // Current velocity in pixels/s (positive = down)
@@ -15,6 +17,7 @@ class GravityScroll {
     this.animating = false;
     this.upwardForce = 0;         // Track upward force from scrolling
     this.maxScroll = 0;
+    this.bouncing = false;        // Track if we're in a bounce state
     
     // Bind handlers
     this.handleScroll = this.handleScroll.bind(this);
@@ -43,6 +46,8 @@ class GravityScroll {
     if (params.scrollMultiplier) this.scrollMultiplier = parseFloat(params.scrollMultiplier);
     if (params.upwardForcePersistence) this.upwardForcePersistence = parseFloat(params.upwardForcePersistence);
     if (params.maxUpwardSpeed) this.maxUpwardSpeed = parseFloat(params.maxUpwardSpeed);
+    if (params.bounceFactor) this.bounceFactor = parseFloat(params.bounceFactor);
+    if (params.minBounceVelocity) this.minBounceVelocity = parseFloat(params.minBounceVelocity);
   }
 
   start() {
@@ -67,7 +72,11 @@ class GravityScroll {
     // Calculate forces
     const gravityForce = this.g * this.pixelsPerMeter;
     const frictionForce = this.velocity * this.friction; // Linear friction for better control
-    const netForce = gravityForce - this.upwardForce - frictionForce;
+    
+    // Reduce friction during bounce to maintain momentum
+    const effectiveFriction = this.bouncing ? frictionForce * 0.5 : frictionForce;
+    
+    const netForce = gravityForce - this.upwardForce - effectiveFriction;
     
     // Update velocity based on net force
     this.velocity += netForce * deltaTime;
@@ -80,13 +89,27 @@ class GravityScroll {
     // Update position based on velocity
     this.position += this.velocity * deltaTime;
 
-    // Handle bounds
+    // Handle bounds and bounce
     if (this.position >= this.maxScroll) {
+      // Hit bottom - bounce based on impact velocity
+      if (!this.bouncing && Math.abs(this.velocity) > this.minBounceVelocity) {
+        // Start bounce with reversed and dampened velocity
+        this.velocity = -this.velocity * this.bounceFactor;
+        // Add a bit of extra upward boost for more dramatic bounce
+        this.velocity -= 200;
+        this.bouncing = true;
+      } else if (!this.bouncing) {
+        // Not enough velocity to bounce, just stop
+        this.velocity = 0;
+      }
       this.position = this.maxScroll;
-      this.velocity = 0;
     } else if (this.position < 0) {
+      // Hit top - just stop
       this.position = 0;
       this.velocity = 0;
+    } else {
+      // Not at bounds - reset bounce state
+      this.bouncing = false;
     }
 
     // Gradually decay upward force
