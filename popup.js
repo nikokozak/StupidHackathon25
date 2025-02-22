@@ -4,12 +4,14 @@ const pixelsSlider = document.getElementById('pixels');
 const frictionSlider = document.getElementById('friction');
 const scrollMultiplierSlider = document.getElementById('scrollMultiplier');
 const persistenceSlider = document.getElementById('persistence');
+const maxSpeedSlider = document.getElementById('maxSpeed');
 
 const gravityValue = document.getElementById('gravity-value');
 const pixelsValue = document.getElementById('pixels-value');
 const frictionValue = document.getElementById('friction-value');
 const scrollMultiplierValue = document.getElementById('scrollMultiplier-value');
 const persistenceValue = document.getElementById('persistence-value');
+const maxSpeedValue = document.getElementById('maxSpeed-value');
 
 // Load saved parameters
 chrome.storage.sync.get({
@@ -18,7 +20,8 @@ chrome.storage.sync.get({
   pixelsPerMeter: 100,
   friction: 2.0,
   scrollMultiplier: 50,
-  upwardForcePersistence: 0.95
+  upwardForcePersistence: 0.95,
+  maxUpwardSpeed: 1000
 }, function(items) {
   // Update sliders with saved values
   gravitySlider.value = items.g;
@@ -26,6 +29,7 @@ chrome.storage.sync.get({
   frictionSlider.value = items.friction;
   scrollMultiplierSlider.value = items.scrollMultiplier;
   persistenceSlider.value = items.upwardForcePersistence;
+  maxSpeedSlider.value = items.maxUpwardSpeed;
   
   // Update display values
   updateDisplayValues();
@@ -41,6 +45,7 @@ function updateDisplayValues() {
   frictionValue.textContent = frictionSlider.value;
   scrollMultiplierValue.textContent = scrollMultiplierSlider.value;
   persistenceValue.textContent = persistenceSlider.value;
+  maxSpeedValue.textContent = maxSpeedSlider.value;
 }
 
 // Send parameters to content script and save to storage
@@ -50,7 +55,8 @@ function sendToContentScript() {
     pixelsPerMeter: parseFloat(pixelsSlider.value),
     friction: parseFloat(frictionSlider.value),
     scrollMultiplier: parseFloat(scrollMultiplierSlider.value),
-    upwardForcePersistence: parseFloat(persistenceSlider.value)
+    upwardForcePersistence: parseFloat(persistenceSlider.value),
+    maxUpwardSpeed: parseFloat(maxSpeedSlider.value)
   };
   
   // Save to storage
@@ -83,6 +89,10 @@ scrollMultiplierSlider.addEventListener('input', () => {
   sendToContentScript();
 });
 persistenceSlider.addEventListener('input', () => {
+  updateDisplayValues();
+  sendToContentScript();
+});
+maxSpeedSlider.addEventListener('input', () => {
   updateDisplayValues();
   sendToContentScript();
 }); 

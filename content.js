@@ -6,6 +6,7 @@ class GravityScroll {
     this.friction = 2.0;          // Friction coefficient (higher = more drag)
     this.scrollMultiplier = 50;   // Multiplier for scroll input strength
     this.upwardForcePersistence = 0.95; // How long upward force lasts (0-1)
+    this.maxUpwardSpeed = 1000;   // Maximum upward scroll speed in pixels/s
     
     // State variables
     this.velocity = 0;            // Current velocity in pixels/s (positive = down)
@@ -40,6 +41,8 @@ class GravityScroll {
     if (params.pixelsPerMeter) this.pixelsPerMeter = parseFloat(params.pixelsPerMeter);
     if (params.friction) this.friction = parseFloat(params.friction);
     if (params.scrollMultiplier) this.scrollMultiplier = parseFloat(params.scrollMultiplier);
+    if (params.upwardForcePersistence) this.upwardForcePersistence = parseFloat(params.upwardForcePersistence);
+    if (params.maxUpwardSpeed) this.maxUpwardSpeed = parseFloat(params.maxUpwardSpeed);
   }
 
   start() {
@@ -68,6 +71,11 @@ class GravityScroll {
     
     // Update velocity based on net force
     this.velocity += netForce * deltaTime;
+
+    // Cap upward velocity (negative = upward)
+    if (this.velocity < 0) {
+      this.velocity = Math.max(this.velocity, -this.maxUpwardSpeed);
+    }
 
     // Update position based on velocity
     this.position += this.velocity * deltaTime;
