@@ -1,4 +1,3 @@
-chrome.action.onClicked.addListener((tab) => {
-  chrome.tabs.sendMessage(tab.id, { command: "scroll" });
-});
+// Background script is now minimal since scrolling is automatic
+// Kept for potential future functionality
 

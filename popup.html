@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      width: 300px;
+      padding: 15px;
+      font-family: system-ui;
+    }
+    .param-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+    }
+    .value-display {
+      font-size: 0.8em;
+      color: #666;
+      margin-top: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .description {
+      font-size: 0.75em;
+      color: #888;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="param-group">
+    <label for="gravity">Gravity</label>
+    <input type="range" id="gravity" min="1" max="50" step="0.1" value="9.81">
+    <div class="value-display">
+      <span id="gravity-value">9.81</span>
+      <span>m/s²</span>
+    </div>
+    <div class="description">Base falling speed</div>
+  </div>
+  
+  <div class="param-group">
+    <label for="pixels">Pixels per Meter</label>
+    <input type="range" id="pixels" min="10" max="500" step="10" value="100">
+    <div class="value-display">
+      <span id="pixels-value">100</span>
+      <span>px/m</span>
+    </div>
+    <div class="description">Screen space scaling</div>
+  </div>
+
+  <div class="param-group">
+    <label for="friction">Friction</label>
+    <input type="range" id="friction" min="0.1" max="5" step="0.1" value="2.0">
+    <div class="value-display">
+      <span id="friction-value">2.0</span>
+    </div>
+    <div class="description">How quickly motion slows down</div>
+  </div>
+
+  <div class="param-group">
+    <label for="scrollMultiplier">Scroll Strength</label>
+    <input type="range" id="scrollMultiplier" min="10" max="200" step="5" value="50">
+    <div class="value-display">
+      <span id="scrollMultiplier-value">50</span>
+    </div>
+    <div class="description">How powerful your scroll wheel is</div>
+  </div>
+
+  <div class="param-group">
+    <label for="persistence">Force Persistence</label>
+    <input type="range" id="persistence" min="0.8" max="0.99" step="0.01" value="0.95">
+    <div class="value-display">
+      <span id="persistence-value">0.95</span>
+    </div>
+    <div class="description">How long scroll force lasts</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html> 

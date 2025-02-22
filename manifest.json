@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Gravity Scroll",
+  "name": "Auto Gravity Scroll",
   "version": "1.0",
-  "description": "Scrolls to bottom with gravitational acceleration",
-  "permissions": ["activeTab"],
+  "description": "Automatically scrolls pages with gravitational acceleration, can be interrupted by user input",
+  "permissions": ["activeTab", "storage"],
   "action": {
-    "default_title": "Gravity Scroll"
+    "default_title": "Gravity Scroll",
+    "default_popup": "popup.html"
   },
   "background": {
     "service_worker": "background.js"
