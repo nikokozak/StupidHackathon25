@@ -2,11 +2,11 @@ class GravityScroll {
   constructor() {
     // Physics parameters
     this.g = 9.81;                // Gravitational acceleration (m/s²)
-    this.pixelsPerMeter = 100;    // Conversion factor for physical simulation
-    this.friction = 2.0;          // Friction coefficient (higher = more drag)
-    this.scrollMultiplier = 50;   // Multiplier for scroll input strength
-    this.upwardForcePersistence = 0.95; // How long upward force lasts (0-1)
-    this.maxUpwardSpeed = 1000;   // Maximum upward scroll speed in pixels/s
+    this.pixelsPerMeter = 400;    // Conversion factor for physical simulation
+    this.friction = 0.1;          // Friction coefficient (higher = more drag)
+    this.scrollMultiplier = 105;   // Multiplier for scroll input strength
+    this.upwardForcePersistence = 0.1; // How long upward force lasts (0-1)
+    this.maxUpwardSpeed = 900;   // Maximum upward scroll speed in pixels/s
     
     // State variables
     this.velocity = 0;            // Current velocity in pixels/s (positive = down)
