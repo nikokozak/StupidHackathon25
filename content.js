@@ -53,8 +53,11 @@ class GravityScroll {
   start() {
     if (this.animating) return;
     
+    // Force scroll to top
+    window.scrollTo(0, 0);
+    
     this.lastTime = performance.now();
-    this.position = window.scrollY;
+    this.position = 0; // Start at top
     this.maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     this.velocity = 0;
     this.upwardForce = 0;
@@ -68,6 +71,9 @@ class GravityScroll {
 
     const deltaTime = (currentTime - this.lastTime) / 1000; // Convert to seconds
     this.lastTime = currentTime;
+
+    // Update maxScroll to handle dynamically loaded content
+    this.maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 
     // Calculate forces
     const gravityForce = this.g * this.pixelsPerMeter;
@@ -87,28 +93,32 @@ class GravityScroll {
     }
 
     // Update position based on velocity
+    const prevPosition = this.position;
     this.position += this.velocity * deltaTime;
 
     // Handle bounds and bounce
     if (this.position >= this.maxScroll) {
-      // Hit bottom - bounce based on impact velocity
-      if (!this.bouncing && Math.abs(this.velocity) > this.minBounceVelocity) {
+      // Only bounce if we're moving downward and fast enough
+      if (this.velocity > this.minBounceVelocity && !this.bouncing) {
         // Start bounce with reversed and dampened velocity
         this.velocity = -this.velocity * this.bounceFactor;
-        // Add a bit of extra upward boost for more dramatic bounce
-        this.velocity -= 200;
         this.bouncing = true;
-      } else if (!this.bouncing) {
-        // Not enough velocity to bounce, just stop
+      } else {
+        // Not bouncing - stop at bottom
         this.velocity = 0;
+        this.bouncing = false;
       }
       this.position = this.maxScroll;
     } else if (this.position < 0) {
       // Hit top - just stop
       this.position = 0;
       this.velocity = 0;
+      this.bouncing = false;
+    } else if (prevPosition === this.maxScroll && this.position < this.maxScroll) {
+      // Just left the bottom during a bounce - keep bouncing state
+      this.bouncing = true;
     } else {
-      // Not at bounds - reset bounce state
+      // Moving freely - reset bounce state
       this.bouncing = false;
     }
 
