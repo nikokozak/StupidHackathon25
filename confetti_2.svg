@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <circle id="confetti-dot" cx="0" cy="0" r="4"/>
+    <rect id="confetti-rect" width="8" height="16" rx="1"/>
+    
+    <g id="confetti-group">
+      <use href="#confetti-rect" x="100" fill="#FF4136">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="y" from="-5" to="1005" dur="3s" repeatCount="indefinite"/>
+      </use>
+      <use href="#confetti-rect" x="200" fill="#FFDC00">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="1.8s" repeatCount="indefinite"/>
+        <animate attributeName="y" from="-5" to="1005" dur="2.7s" repeatCount="indefinite"/>
+      </use>
+      <use href="#confetti-rect" x="300" fill="#7FDBFF">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="2.2s" repeatCount="indefinite"/>
+        <animate attributeName="y" from="-5" to="1005" dur="3.2s" repeatCount="indefinite"/>
+      </use>
+      <use href="#confetti-dot" x="400" fill="#B10DC9">
+        <animate attributeName="y" from="-5" to="1005" dur="2.5s" repeatCount="indefinite"/>
+      </use>
+      <use href="#confetti-rect" x="500" fill="#01FF70">
+        <animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="1.9s" repeatCount="indefinite"/>
+        <animate attributeName="y" from="-5" to="1005" dur="2.9s" repeatCount="indefinite"/>
+      </use>
+      <use href="#confetti-dot" x="600" fill="#FF851B">
+        <animate attributeName="y" from="-5" to="1005" dur="2.6s" repeatCount="indefinite"/>
+      </use>
+    </g>
+  </defs>
+
+  <!-- Multiple confetti groups with different positions -->
+  <use href="#confetti-group"/>
+  <use href="#confetti-group" transform="translate(100, 0)"/>
+  <use href="#confetti-group" transform="translate(-100, 0)"/>
+  <use href="#confetti-group" transform="translate(200, 0)"/>
+  <use href="#confetti-group" transform="translate(-200, 0)"/>
+  <use href="#confetti-group" transform="translate(300, 0)"/>
+  <use href="#confetti-group" transform="translate(-300, 0)"/>
+  <use href="#confetti-group" transform="translate(400, 0)"/>
+  <use href="#confetti-group" transform="translate(-400, 0)"/>
+  <use href="#confetti-group" transform="translate(500, 0)"/>
+  <use href="#confetti-group" transform="translate(-500, 0)"/>
+  <use href="#confetti-group" transform="translate(600, 0)"/>
+  <use href="#confetti-group" transform="translate(-600, 0)"/>
+  <use href="#confetti-group" transform="translate(700, 0)"/>
+  <use href="#confetti-group" transform="translate(-700, 0)"/>
+  <use href="#confetti-group" transform="translate(800, 0)"/>
+</svg>

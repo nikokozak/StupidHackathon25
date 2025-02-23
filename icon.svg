@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Base circle -->
+  <circle cx="64" cy="64" r="48" fill="#000000"/>
+  
+  <!-- Flame effect -->
+  <g transform="translate(64, 64)">
+    <path d="M0,-60 C20,-50 30,-30 30,-10 C30,20 10,40 0,48 C-10,40 -30,20 -30,-10 C-30,-30 -20,-50 0,-60" 
+          fill="#FF6B35" stroke="none">
+      <animate attributeName="d" 
+               dur="0.5s" 
+               repeatCount="indefinite" 
+               values="
+                M0,-60 C20,-50 30,-30 30,-10 C30,20 10,40 0,48 C-10,40 -30,20 -30,-10 C-30,-30 -20,-50 0,-60;
+                M0,-58 C18,-48 28,-28 28,-8 C28,22 8,42 0,46 C-8,42 -28,22 -28,-8 C-28,-28 -18,-48 0,-58;
+                M0,-60 C20,-50 30,-30 30,-10 C30,20 10,40 0,48 C-10,40 -30,20 -30,-10 C-30,-30 -20,-50 0,-60"
+      />
+    </path>
+  </g>
+  
+  <!-- Highlight -->
+  <circle cx="48" cy="48" r="12" fill="#FFFFFF" opacity="0.3"/>
+</svg> 
